@@ -8,7 +8,7 @@
 
 安装步骤如下：
 
-```
+```py
 $ clone git https://github.com/guguaihaha/Zr-engine-v2.git
 
 $ yarn install
@@ -19,3 +19,5 @@ $ npm run dev
 //生成上线压缩并优化的代码
 $ npm run build
 ```
+
+
