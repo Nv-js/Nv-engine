@@ -30,10 +30,11 @@ function removeDir(path) {
         });
         fs.rmdirSync(path);
     }
-        build();
+    build();
 }
 //
 removeDir(_path)
+
 
 async function build() {
     //watcher status

@@ -1,10 +1,31 @@
-export default class Person {
-    constructor (name, gender = '男') {
-        this.name = name
-        this.gender = gender
+class loader {
+    constructor(handler,_R){
+        this.handler = handler
+        this.queue = {}
+        this._this = _R
     }
 
-    say () {
-        console.log(`我的名字是${this.name}，是一个${this.gender}生99`)
+
+    execute(){
+        if(this.handler){
+            this.handler();
+            this.handler = null;
+        }
     }
+
+    set(path){
+        this.queue[path] = 1
+    }
+
+    delete(path){
+        delete this.queue[path]
+    }
+
+    get(path){
+        return this.queue[path]
+    }
+
+
 }
+
+export default loader

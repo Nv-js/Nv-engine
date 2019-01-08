@@ -47,6 +47,7 @@ let _exp = {
 if(!isProd){
     let _watchOptions = {
         ...dev.watch,
+        plugins,
         input,
         output
     }

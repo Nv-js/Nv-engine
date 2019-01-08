@@ -8,7 +8,22 @@
 <body>
 <script type="text/javascript" src="/dist/zr.js"></script>
 <script type="text/javascript">
-   //test code
+   Zr.add("./abc/dd/ee/bb/cc/dd/ff",function(){
+       var go = 1;
+       return go;
+   },{requires:['./a/go.css','./b/c/fss','/aaaa/bbb/ccc/d','jquery','init'],alias:'bb'})
+
+   Zr.add('./mm/n',function(){
+       var just = 2;
+       return just
+   },{alias:'mn'})
+
+   Zr.use("init",'./jquery/','./mm/n',function(zr){
+       console.log('gogogogoggo')
+   })
+
+
+
 </script>
 </body>
 </html>

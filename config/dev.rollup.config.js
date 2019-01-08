@@ -5,6 +5,7 @@ const devPlugins = [
     liveServer({
         file: 'index.html',
         open: true,
+        ignore:'src,node_modules,plugin_modules,docs,.gitignore,git/FETCH_HEAD',
         root: ''
     })
 ]
@@ -17,7 +18,7 @@ const target = {
 
 const watchOptions = {
     watch:{
-        include: 'src/**'
+        include: 'src/**/*.js'
     }
 }
 
