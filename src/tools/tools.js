@@ -118,7 +118,7 @@ function _extend(){
         }
     }
         //
-    return {}
+    return parent
 }
 
 function _each(obj, callback){

@@ -1,6 +1,6 @@
 import $ from '../tools/tools'
 import U from '../tools/utils'
-import {global} from '../config/global'
+import {global,cmpstaus} from '../config/global'
 
 class add {
     constructor(name, factory, config){
@@ -23,15 +23,16 @@ class add {
             _config = {
                 ..._this.config,
                 factory   : _this.factory,
+                export    : '',
                 name      : U.fixPathItem(_this.name),
                 requires  : _deps,
-                status    : 2,
-                lock   : 0
+                status    : cmpstaus.LOADED,
+                lock      : 0
             }
         //注册模块到核心库上     
         U.register(_config,_R)
         //发布订阅注册，便于后续通知，当然此处也可以不进行注册，目前此行为语法糖，用于演示页面添加的流程。
-        _R._pub.subscibe(_this.name);      
+        // _R._pub.subscibe(_this.name);      
     }
 }
 

@@ -14,26 +14,24 @@ class loadFile {
         this.charset = ""
 
         this.attrs = ""
-        //时间戳
-        this.randomTime = "?_t="+ $.getWords(true,20)
+        
         //文件格式类型
-        this.type = $.extname(url).split(".")[1]
+        this.type = $.extname(url).split('.')[1].split('?')[0]
         //文件重复加载
         this.repeat = {}
 
-        this.timeout = ""
+        this.timeout = 10
    
         this.headNode = ""
-
-
-        if($.isPlainObject(success)){
+        
+        if($.isObject(success)){
             this.success = success.success
 
             this.error = success.error
 
-            this.timeout = success.timeout
+            this.timeout = success.timeout || this.timeout
 
-            this.charset = success.charset
+            this.charset = success.charset || this.charset
 
             this.attrs = success.attrs
         }
@@ -60,11 +58,12 @@ class loadFile {
         
         node[readyEvent] = function(){
             node.onreadystatechange = node.onload = null;
+            _this._timer.cancel();
             _this.success()
         }
 
         if(_this.timeout){
-            $.later(function(){
+        _this._timer = $.later(function(){
                 _this.error()
             },_this.timeout*1000)
         }
@@ -75,12 +74,14 @@ class loadFile {
 
         switch (_this.type){
             case 'css':
+            node.rel = 'stylesheet'
             node.href = _this.url
             _this.headNode.appendChild(node)
             break
 
             default:
             node.src = _this.url
+            node.async = true
             _this.headNode.insertBefore(node,_this.headNode.firstChild)
             break
         }

@@ -8,21 +8,20 @@
 <body>
 <script type="text/javascript" src="/dist/zr.js"></script>
 <script type="text/javascript">
-   Zr.add("./abc/dd/ee/bb/cc/dd/ff",function(){
-       var go = 1;
-       return go;
-   },{requires:['./a/go.css','./b/c/fss','/aaaa/bbb/ccc/d','jquery','init'],alias:'bb'})
-
-   Zr.add('./mm/n',function(){
-       var just = 2;
-       return just
-   },{alias:'mn'})
-
-   Zr.use("init",'./jquery/','./mm/n',function(zr){
-       console.log('gogogogoggo')
+   Zr.config({
+       baseUrl:'http://storage.jd.com/v1.0.0',
+       development:true,
+       storage:{
+           type:"session"
+       }
    })
 
 
+
+
+   Zr.use('./cdn_a','./cdn_g','./cdn_m','./cdn_test',function(){
+       
+   })
 
 </script>
 </body>

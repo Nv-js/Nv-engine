@@ -1,10 +1,13 @@
 import $ from './tools'
-import {cmpstaus} from '../config/global'
+import {cmpstaus,global} from '../config/global'
+import getFile from './getFile'
+import myLoader from '../core/loader'
 
 const  regx = {
     Regx_name           :  /^\.[\/|\\]\w+[\/|\\](\w.[\/|\\])+/,
     Regx_name_l         :  /^(\.[\/|\\])/g,
-    Regx_name_r         :  /^[\/|\\]/g
+    Regx_name_r         :  /^[\/|\\]/g,
+    Regx_prefix         :  /\.[\/|\\]+/
 }
 
 
@@ -35,6 +38,18 @@ const common = {
     isAbsoluteName     : (n) => {
         return n.match(regx.Regx_name_r) ? 1 : 0
     },
+    isRegisterAllName  : (ns, R) => {
+        let status = 1,
+            _M = R.global.MODULESLIST
+        ns.forEach(function(ele){
+            if(!_M[ele.path]){
+                status = 0
+                return false
+            }
+        })
+        return status;
+    }
+    
 }
 
 const tools = {
@@ -46,7 +61,7 @@ const tools = {
     getFixRequiresPaths  :  (T, R) => {
        let _this = T, 
            _checkName = common.checkValidName(_this.name),
-           _requires = _this.config.requires || {},
+           _requires = _this.config.requires || [],
            _rets = [];
         if(_checkName && _requires.length > 0){
             _requires.forEach(function(ele,index,arr){
@@ -81,7 +96,7 @@ const tools = {
      * @param  {组件的核心集} R
      */
     getCoreModuleList  : (ns, R) => {
-        let _config = R.config,
+        let _config = R.global.CONFIG,
             _repeat = {},
             _m;
         if(ns && $.isArray(ns)){
@@ -153,9 +168,9 @@ const add = {
      register:function(config, R) {
          let name = config.name,
              M = R.global.MODULESLIST
+             
          if(M[name]){
-             R.log(name + '重复注册，请检查后核实')
-             return
+            $.extend(M[name],config)
          }
          M[name] = config;
          R.global.MODULESLIST = {
@@ -197,11 +212,24 @@ const use = {
     //检查路径集合是否都已经注册完毕,并返回未注册完毕的目标集合
     getUnRegisterPath(path, R){
         let _M = R.global.MODULESLIST,
-            _unR = []
+            _unR = [],
+            _repeat = {}
         if($.isArray(path)){
             path.forEach(function(ele, index, arr){
+                if(_repeat[ele]){
+                    return
+                }
+                _repeat[ele] = 1
+
                 let _m = _M[ele]
-                if(!_m || _m.status < cmpstaus.SUCCESS){
+                if(!_m){
+                    _unR.push({
+                        path: ele,
+                        m   : _m
+                    })
+                    return 
+                }
+                if(_m.status < cmpstaus.SUCCESS){
                     _unR.push({
                         path: ele,
                         m   : _m
@@ -213,6 +241,191 @@ const use = {
             return []
         }
     },
+    //未注册模块需要加载该模块并进行状态更新
+    requestFile(path,loader, R){
+        if($.isString(path)){
+            path = [path]
+        }
+        path.forEach(function(ele, index, arr){
+            use.requestFilePath(ele,loader, R)
+        })
+
+            
+    },
+    //加载对应路径文件
+    requestFilePath(path,loader, R){
+        let baseUrl = R.global.CONFIG.baseUrl,
+            cdnUrl = R.global.CONFIG.cdnUrl
+        //注册状态
+        add.register({
+            name:path,
+            status    : 0,
+            lock   : 0
+        }, R)
+        //加载文件
+        let _repath = path.replace(regx.Regx_prefix,'')
+        let _typeStatus = _repath.lastIndexOf("cdn_"),
+            _path = baseUrl + _repath
+        if(_typeStatus > -1){
+            _path = cdnUrl + _repath
+        }
+        //更新模块状态
+        R.global.MODULESLIST[path].status = cmpstaus.LOADING
+        //
+        if(!$.endWidth(_path,'.js') && !$.endWidth(_path,'.css')){
+            _path += '.js'
+        }
+        //如果开启了开发模式，则添加后缀
+        if(R.global.CONFIG.development){
+           _path += '?t='+$.getWords(1,10,20)
+        }
+        let _file = new getFile(_path,{
+            success:function(){
+                //删除等待条目
+                loader.delete(path)
+                if($.endWidth(path,'.css')){
+                    R.global.MODULESLIST[path].status = cmpstaus.SUCCESS
+                    R.global.MODULESLIST[path].lock = 1
+                    //成功状态则通知其他订阅者
+                    R._pub.publish(path)
+                }
+                if(loader.isEmpty()){
+                    loader.execute();
+                }
+            },
+            error:function(){
+                window[global.PREFIX].throwError('文件不存在或者已经丢失，路径：' + _path)
+                R.global.MODULESLIST[path].status = cmpstaus.ERROR
+            }
+        })  
+        _file.request()
+    },
+    
+    /**
+     * 获取所有依赖模块
+     * @param  {} paths
+     * @param  {} R
+     */
+    getAllRequiresPaths(paths, R){
+        let _requires = [],
+            _repeatR = [],
+            _repeat = {}
+        paths.forEach(function(ele, index, arr){
+            let _e = R.global.MODULESLIST[ele.path],
+                _r = _e.requires
+            if(_r && _r.length > 0 && _e.status < cmpstaus.READY_TO_BIND){
+                _requires = _requires.concat(_r)
+            }
+        })
+        _requires.forEach(function(ele){
+            if(_repeat[ele]){
+                return
+            }
+            _repeatR.push(ele)
+        })
+        return _repeatR
+    },
+    bindingAllRelationPaths(paths, R, handler){
+
+        let _M = R.global.MODULESLIST,
+             _m,
+             _rets = [],
+             _go = 1
+        paths.forEach(function(ele){
+            _m = _M[ele.path]
+            if(_m.status === cmpstaus.SUCCESS){
+                return
+            }
+            //判断当前的模块状态，如果是BINDING以上的状态，则全体等待订阅这个路径完成后再继续运行
+            function waitBinding(){
+                bindingAllRelationPaths(paths, R, handler)
+            }
+            if(_m.status >= cmpstaus.BINDING){
+                R._pub.subscibe(ele.path,waitBinding)
+                _go = 0
+                return false
+            }
+
+            R.global.MODULESLIST[ele.path].status = cmpstaus.BINDING
+            R.global.MODULESLIST[ele.path].lock = 1
+            _rets.push(ele.path);
+        })
+        //当前订阅了绑定行为，终止所有流程，等待通知再执行
+        if(!_go){
+            return false
+        }
+        //
+        if(_rets.length){
+            use.bindingExtend(_rets, R, handler)
+        }else{
+            handler()
+        }
+
+    },
+    bindingExtend(paths, R, handler){
+        let _M = R.global.MODULESLIST
+        paths.forEach(function(ele){
+            let _m           = _M[ele],
+                _factory     = _m.factory,
+                _requires    = _m.requires,
+                hand,
+                handR,
+                _rets = [R]
+                
+                if(_requires.length){
+                    _requires.forEach(function(rele){
+                        let _mi = _M[rele]
+                       if(!_mi){
+                           R.throwError('检查该模块'+rele+'是否拼写异常')
+                       }
+                       if($.extname(rele) === '.css'){
+                           hand = undefined
+                       }else{
+                           hand = _mi.export ? _mi.export : _mi.factory()
+                       }
+                       _rets.push(hand)
+                    })
+                }
+                handR = _factory(..._rets)
+                R.global.MODULESLIST[ele].export = handR
+                R.global.MODULESLIST[ele].status = cmpstaus.SUCCESS
+                R._pub.publish(ele)          
+        })
+       handler() 
+    },
+    //模块已经加载，检查依赖是否存在，如果存在则启用依赖
+    checkAndReload(paths, loader, R){
+        if(use.getUnRegisterPath(paths, R).lenght == 0){
+            console.log("all binds and request loaded over, now run execute once")
+            loader.execute()
+            return
+        }
+        let _store = function(){
+            use.checkAndReload(paths, loader, R)
+        }
+        let _M = R.global.MODULESLIST,
+            _requires = [],
+            _bindings = [],
+            _selfLoader = new myLoader(_store)  
+        paths.forEach(function(ele, index, arr){
+            let _e = R.global.MODULESLIST[ele],
+                _r = _e.requires
+            if(_r && _r.length > 0 && _e.status < cmpstaus.READY_TO_BIND){
+                _requires = _requires.concat(_r)
+            }else{
+                _bindings.push(_e.name)
+                _selfLoader.set(_e.name)
+            }
+            R.global.MODULESLIST[ele].status = cmpstaus.READY_TO_BIND
+            
+        })
+
+        // //绑定关系并检查是否进行回调
+        // use.bindingsList(_bindings, _selfLoader, R)
+        // //使用所有依赖状态
+        // use.depList(_requires, _selfLoader, R)
+
+    }
 
     
 }

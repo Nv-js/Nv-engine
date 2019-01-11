@@ -13,13 +13,14 @@ let _T = {
       },
       add:module.add,
       use:module.use,
+      config:module.config,
       global,
       log,
       throwError,
       cmpstaus,
-      config:global.CONFIG,
       _pub:new publish()     
 }
+//
 
 if(!window[global.PREFIX]){
       //发布订阅初始化
