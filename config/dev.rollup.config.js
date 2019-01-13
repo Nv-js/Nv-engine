@@ -18,11 +18,9 @@ const target = {
 
 const watchOptions = {
     watch:{
-        include: 'src/**/*.js'
+        include: 'src/**/*'
     }
 }
-
-
 
 module.exports = {
     plugins : devPlugins,

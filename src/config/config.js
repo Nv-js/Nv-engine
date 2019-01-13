@@ -22,18 +22,22 @@ export default  {
             dp : {
                 version : '1.0.0',
                 path    : './dp/@version/cdn_index'
+            },
+            zr : {
+                version : '1.0.0',
+                path    : './zr/@version/cdn_index'
             }
         },
         //语言设置：详情见多语言文档
-        language        : 'zh_CN',
-        storage         : {
-            //存储方式：'static'、'session'、'local'
-            type        : 'static',
-            //存储别名，请勿更改，否则无法找到缓存文件
-            name        : 'M8duJDH82NMDH928JDHsiJHDN',
-            //当前版本号，如果版本与缓存版本不同，则清空缓存并同时重载，请勿更改，否则会强制更新所有缓存文件
-            version     : '20190101'
-        }
+        language        : 'zh_CN'
+        // storage         : {
+        //     //存储方式：'static'、'session'、'local'
+        //     type        : 'static',
+        //     //存储别名，请勿更改，否则无法找到缓存文件
+        //     name        : 'M8duJDH82NMDH928JDHsiJHDN',
+        //     //当前版本号，如果版本与缓存版本不同，则清空缓存并同时重载，请勿更改，否则会强制更新所有缓存文件
+        //     version     : '20190101'
+        // }
     },
     prefix
 }      

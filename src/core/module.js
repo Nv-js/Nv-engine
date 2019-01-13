@@ -49,9 +49,8 @@ const useModule = function(){
 
 const configModule = function(config){
     $.extend(true,_config.config,config)
-    storage(_config.config)
+   //  storage(_config.config)
 }
-
 export default {
    add     : addModule,
    use     : useModule,

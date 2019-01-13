@@ -298,20 +298,19 @@ const _browser = {
                 if(arr[2]!=null) document.cookie= key + "="+arr[2]+";expires="+exp.toGMTString()+";path=/";
             }
         }
+
     },
     storage       : (which,key,value,isClear) => {
         let _w = false,
         _key = key,
         _value = value,
         _isClear = false;
-
         if(typeof(which) == "boolean"){
             _w = which
         }else{
             _key = which;
             _value = key;
         }
-
         if(typeof(_value) == "object"){
             _value = JSON.stringify(_value);
         }

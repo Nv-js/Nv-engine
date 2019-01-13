@@ -9,18 +9,13 @@
 <script type="text/javascript" src="/dist/zr.js"></script>
 <script type="text/javascript">
    Zr.config({
-       baseUrl:'http://storage.jd.com/v1.0.0',
-       development:true,
-       storage:{
-           type:"session"
-       }
+       baseUrl:'/test/',
+    //    development:true
    })
-
-
-
-
-   Zr.use('./cdn_a','./cdn_g','./cdn_m','./cdn_test',function(){
-       
+   Zr.use('./jquery',function(zr,$){
+       $(function(){
+           console.log($('body'))
+       })
    })
 
 </script>

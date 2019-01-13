@@ -4,7 +4,7 @@ import getFile from './getFile'
 import myLoader from '../core/loader'
 
 const  regx = {
-    Regx_name           :  /^\.[\/|\\]\w+[\/|\\](\w.[\/|\\])+/,
+    Regx_name           :  /^\.[\/|\\]\w+[\/|\\]/,
     Regx_name_l         :  /^(\.[\/|\\])/g,
     Regx_name_r         :  /^[\/|\\]/g,
     Regx_prefix         :  /\.[\/|\\]+/
@@ -186,19 +186,19 @@ const use = {
         let _M = R.global.MODULESLIST,
             _m,
             _mName,
-            _mFactory,
+            _mExport,
             _mAlias,
             _rets = [R]
         if($.isArray(paths)){
             paths.forEach(function(ele, index, arr){
                 _m        = _M[ele]
                 _mName    = _m.name
-                _mFactory = _m.factory || {}
+                _mExport = _m.export
                 _mAlias   = _m.alias || ''
                 if(_mName && $.extname(_mName) !== '.css'){
                     try{
-                        _rets.push(_mFactory)
-                        _mAlias ? R.alias[_mAlias] = _mFactory : ''
+                        _rets.push(_mExport)
+                        _mAlias ? R.alias[_mAlias] = _mExport : ''
                     } catch(err) {
                         R.throwError('请检查别名为：'+_mAlias+'的'+_mName+'模块异常')
                     }
@@ -313,16 +313,25 @@ const use = {
         paths.forEach(function(ele, index, arr){
             let _e = R.global.MODULESLIST[ele.path],
                 _r = _e.requires
+
+
+
             if(_r && _r.length > 0 && _e.status < cmpstaus.READY_TO_BIND){
                 _requires = _requires.concat(_r)
             }
         })
+        //去重
         _requires.forEach(function(ele){
             if(_repeat[ele]){
                 return
             }
             _repeatR.push(ele)
         })
+
+
+
+
+
         return _repeatR
     },
     bindingAllRelationPaths(paths, R, handler){
@@ -389,44 +398,34 @@ const use = {
                 handR = _factory(..._rets)
                 R.global.MODULESLIST[ele].export = handR
                 R.global.MODULESLIST[ele].status = cmpstaus.SUCCESS
-                R._pub.publish(ele)          
+                R._pub.publish(ele)
+                //通知绑定关系
+                // use.storagePath(ele, R)      
         })
        handler() 
     },
-    //模块已经加载，检查依赖是否存在，如果存在则启用依赖
-    checkAndReload(paths, loader, R){
-        if(use.getUnRegisterPath(paths, R).lenght == 0){
-            console.log("all binds and request loaded over, now run execute once")
-            loader.execute()
-            return
+    //存储成熟的绑定关系到缓存,暂时不用
+    storagePath(path, R){
+        let config   = R.global.CONFIG,
+            _storage = config.storage,
+            _name    = _storage.name,
+            _type    = _storage.type == 'session' ? true : _storage.type == 'static' ? '' : false,
+            _version = _storage.version,
+            _m = R.global.MODULESLIST[path]
+        if(_type !== ''){
+            let _getS    = $.storage(_type, _name) || '{}',
+            _default = JSON.parse(_getS)
+            _default.version = _version
+            if($.isFunction(_m.factory)){
+                _m.factory += '' 
+            } 
+            _default[path] = _m
+            _default = JSON.stringify(_default)
+            _default = JSON.parse(_default)
+            $.storage(_type, _name, _default)    
         }
-        let _store = function(){
-            use.checkAndReload(paths, loader, R)
-        }
-        let _M = R.global.MODULESLIST,
-            _requires = [],
-            _bindings = [],
-            _selfLoader = new myLoader(_store)  
-        paths.forEach(function(ele, index, arr){
-            let _e = R.global.MODULESLIST[ele],
-                _r = _e.requires
-            if(_r && _r.length > 0 && _e.status < cmpstaus.READY_TO_BIND){
-                _requires = _requires.concat(_r)
-            }else{
-                _bindings.push(_e.name)
-                _selfLoader.set(_e.name)
-            }
-            R.global.MODULESLIST[ele].status = cmpstaus.READY_TO_BIND
-            
-        })
-
-        // //绑定关系并检查是否进行回调
-        // use.bindingsList(_bindings, _selfLoader, R)
-        // //使用所有依赖状态
-        // use.depList(_requires, _selfLoader, R)
-
+        return R
     }
-
     
 }
 

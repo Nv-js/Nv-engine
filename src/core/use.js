@@ -8,7 +8,6 @@ class use {
         let _this = this
         _this.args           = Array.prototype.slice.call(arguments),
         _this.handler        = _this.args[_this.args.length - 1]
-
         if($.isFunction(_this.handler)){
             _this.handler = _this.args.pop()
         }else if($.isObject(_this.handler)){
@@ -22,7 +21,6 @@ class use {
         _this.fixModule = U.getCoreModuleList(_this.fixModule, window[config.prefix])
         _this._init();
     }
-
 
     _init(){
         var _this = this;
