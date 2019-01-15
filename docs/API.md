@@ -149,9 +149,9 @@ Nv的API
      
    <br/>
    
-   + options.requestTime   (Bolean)
+   + options.development   (Bolean)
    
-     **选填**，生成随即时间戳，防止缓存，开发环境建议打开，上线后必须关闭,默认为'false'，关闭
+     **选填**，是否是开发模式，开发模式将会开启报错提醒、非压缩格式、异常提醒和防止缓存等，默认是'false'上线模式
      
    <br/>     
      
@@ -165,6 +165,8 @@ Nv的API
    + options.language  (String)
    
      **选填**，当前语言环境，设置将会影响所有组件的显示，组件会默认语言会依据此设置，如果组件需要单独配置语言，请根据组件文档另行配置。
+     
+     [所有语言格式]（language.md）
      
    <br/>
    
