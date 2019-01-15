@@ -32,15 +32,13 @@ let _T = {
 
 if(!window[global.PREFIX]){
       //发布订阅初始化
-      //
-      //
       window[global.PREFIX] = _T
       window[global.PREFIX].tools.later(function(){
-            // window[global.PREFIX].use('zr',function(){
-            //       window[global.PREFIX].readyQueen.forEach(function(ele){
-            //             ele()
-            //       })
-            // })
+            window[global.PREFIX].use('init','dp',function(){
+                  window[global.PREFIX].readyQueen.forEach(function(ele){
+                        ele()
+                  })
+            })
       },0)
 
 }

@@ -5,8 +5,8 @@ const prodPlugins = [
 ]
 
 const target = {
-    file: 'dist/zr.min.js',
-    name:"Zr",
+    file: 'dist/nv.min.js',
+    name:"Nv",
     format: 'umd',
     sourcemap:true
 }

@@ -11,8 +11,8 @@ const devPlugins = [
 ]
 
 const target = {
-    file: 'dist/zr.js',
-    name:"Zr",
+    file: 'dist/nv.js',
+    name:"Nv",
     format: 'umd'
 }
 

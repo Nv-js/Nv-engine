@@ -3,20 +3,20 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Dev demo test</title>
+    <title>Welcome to Nirvana</title>
 </head>
-<body>
-<script type="text/javascript" src="/dist/zr.js"></script>
+<body style="text-align: center;line-height: 30px;">
+
+    <h3>欢迎使用Nv-engine调试界面</h3>
+    <p>具体输出请打开调试控制台进行查看和跟踪进度</p>
+    <p>clone项目到本地，然后进入Nv-engine的目录。同时安装依赖: $ yarn install</p>
+    <p>如果是开发模式：$ npm run dev</p>
+    <p>如果是生产模式：$ npm run build</p>
+
+
+<script type="text/javascript" src="/dist/nv.js"></script>
 <script type="text/javascript">
-   Zr.config({
-       baseUrl:'/test/',
-    //    development:true
-   })
-   Zr.use('./jquery',function(zr,$){
-       $(function(){
-           console.log($('body'))
-       })
-   })
+  
 
 </script>
 </body>
