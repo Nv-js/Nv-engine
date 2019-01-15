@@ -15,7 +15,7 @@ Nv作为二代引擎，是Zr引擎的重构版本。
 安装步骤如下：
 
 ```node
-$ clone git https://github.com/guguaihaha/Zr-engine-v2.git
+$ clone git https://github.com/guguaihaha/Nv-engine.git
 
 $ yarn install
 
