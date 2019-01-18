@@ -25,3 +25,19 @@ $ npm run dev
 //生成上线压缩并优化的代码
 $ npm run build
 ```
+
+### 快速导航
+
++ [官网](http://nv.jd.com)
+
++ [引擎常用方法](docs/API.md)
+
++ [快速导航](docs/quick.md)
+
++ [都语言支持](docs/language.md)
+
++ [组件库](https://github.com/guguaihaha/Nv-source)
+
++ [PRO](https://github.com/guguaihaha/Nv-pro)
+
+
