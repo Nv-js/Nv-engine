@@ -19,7 +19,7 @@ class add {
     _init(){
         let _this = this,
             _R = window[global.PREFIX],
-            _deps = U.getFixRequiresPaths(_this,window[global.PREFIX],_R),
+            _deps = U.getFixRequiresPaths(_this,_R),
             _config = {
                 ..._this.config,
                 factory   : _this.factory,

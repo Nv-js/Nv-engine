@@ -53,7 +53,12 @@ const common = {
 }
 
 const tools = {
-
+     getPathPrefix        :  (path) => {
+         if(path.indexOf("/") != -1){
+             path = path.substring(0,  path.lastIndexOf("/")+1) ;
+         }
+         return path
+     },
     /**
      * @param  {当前可执行的环境} T
      * @param  {全局函数集合} R
@@ -61,15 +66,17 @@ const tools = {
     getFixRequiresPaths  :  (T, R) => {
        let _this = T, 
            _checkName = common.checkValidName(_this.name),
+           _prefix = tools.getPathPrefix(_this.name),
            _requires = _this.config.requires || [],
            _rets = [];
+
         if(_checkName && _requires.length > 0){
             _requires.forEach(function(ele,index,arr){
                 // 如果依赖开头是以“./” or ".\"开头
                 let _v = common.isRelativeName(ele)
                 if(_v){
                     ele = ele.replace(regx.Regx_name_l, "")
-                    _rets.push(_checkName[0] + ele)
+                    _rets.push(_prefix + ele)
                     return
                 }
                 // 如果当前是以‘/’ or "\" 开头
@@ -312,9 +319,20 @@ const use = {
             _repeat = {}
         paths.forEach(function(ele, index, arr){
             let _e = R.global.MODULESLIST[ele.path],
-                _r = _e.requires
-
-
+                _r = _e.requires || []
+            //     _rets = []
+            // console.log('===')
+            // console.log(_e)
+            // console.log(_r)
+            // console.log('===')
+            // if(_r.length){
+            //     let _prefix = tools.getPathPrefix(ele.path)
+            //     _r.forEach(function(_ele){
+            //        if(common.isRelativeName(_ele)){
+            //
+            //        }
+            //     })
+            // }
 
             if(_r && _r.length > 0 && _e.status < cmpstaus.READY_TO_BIND){
                 _requires = _requires.concat(_r)

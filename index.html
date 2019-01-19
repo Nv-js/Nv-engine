@@ -16,7 +16,12 @@
 
 <script type="text/javascript" src="/dist/nv.js"></script>
 <script type="text/javascript">
-  
+  Nv.config({
+      baseUrl:"/"
+  })
+    Nv.ready(function(){
+        Nv.use('./test/1.0.1/a')
+    })
 
 </script>
 </body>

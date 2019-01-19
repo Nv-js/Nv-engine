@@ -60,7 +60,7 @@ class use {
         //paths肯定是未加载的或者待绑定的路径集合，所以要全部挂起
         let  R = window[config.prefix],
             _M = R.global.MODULESLIST
-        //检查是否有未加载的path，全部加载则执行绑定   
+        //检查是否有未加载的path，全部加载则执行绑定
         function _loaderRequest(){
             let _loadRets = [],
                 _status = U.isRegisterAllName(paths, R)
@@ -86,7 +86,7 @@ class use {
                     //有未注册的模块
                     let _unregister = []
                         _this._loader  = new loader(_loaderRequest)
-                    //筛选未注册的模块，同时加入新的loader队列    
+                    //筛选未注册的模块，同时加入新的loader队列
                     paths.forEach(function(ele){
                        if(!ele.m){
                            _unregister.push(ele.path)
