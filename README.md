@@ -49,10 +49,10 @@ $ npm run build
 
 + [快速导航](docs/quick.md)
 
-+ [都语言支持](docs/language.md)
++ [多语言支持](docs/language.md)
 
-+ [组件库](https://github.com/guguaihaha/Nv-source)
++ [组件库常用方法](https://github.com/guguaihaha/Nv-source)
 
-+ [PRO](https://github.com/guguaihaha/Nv-pro)
++ [PRO系统解决方案](https://github.com/guguaihaha/Nv-pro)
 
 

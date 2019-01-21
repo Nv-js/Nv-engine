@@ -177,9 +177,10 @@ const add = {
              M = R.global.MODULESLIST
              
          if(M[name]){
-            $.extend(M[name],config)
+             M[name] = $.extend(true,M[name],config)
+         }else{
+             M[name] = config;
          }
-         M[name] = config;
          R.global.MODULESLIST = {
              ...M
          }
@@ -394,7 +395,7 @@ const use = {
         paths.forEach(function(ele){
             let _m           = _M[ele],
                 _factory     = _m.factory,
-                _requires    = _m.requires,
+                _requires    = _m.requires || [],
                 hand,
                 handR,
                 _rets = [R]
