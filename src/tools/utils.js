@@ -322,10 +322,6 @@ const use = {
             let _e = R.global.MODULESLIST[ele.path],
                 _r = _e.requires || []
             //     _rets = []
-            // console.log('===')
-            // console.log(_e)
-            // console.log(_r)
-            // console.log('===')
             // if(_r.length){
             //     let _prefix = tools.getPathPrefix(ele.path)
             //     _r.forEach(function(_ele){

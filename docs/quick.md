@@ -45,4 +45,4 @@
 
 这种方式就是采用Nv-pro布局，我们可以使用的具体方案如下
 
-[此处是如何使用Pro系统解决方案](//github.com/guguaihaha/nv-pro-flex)
+[此处是如何使用Pro系统解决方案](//github.com/guguaihaha/Nv-pro)
