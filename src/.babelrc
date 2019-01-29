@@ -3,6 +3,7 @@
       [
         "latest",
         {
+          "loose":false,
           "es2015": {
             "modules": false
           }
@@ -11,6 +12,8 @@
       "stage-3"
     ],
     "plugins": [
-        "external-helpers"
+       [
+         "external-helpers",
+       ]
       ]
   }

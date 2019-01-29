@@ -37,7 +37,6 @@ const _is = {
             return false;
         }
         //
-        for(let key in obj){}
         return ((key===undefined) || ObjProto.hasOwnProperty.call(obj,key));
     },
     isFunction        : (obj) => {
@@ -124,9 +123,12 @@ function _extend(){
 function _each(obj, callback){
     obj = obj || [];
     if(_is.isArray(obj)){
-        obj.forEach(function(currentValue,index,array){
+        let index = 0,
+            l = obj.length
+        for(;index < l;index++){
+            let currentValue = obj[index]
             callback.call(this,index,currentValue);
-        });
+        }
         return;
     }
     let length = obj.length || 0;
@@ -349,7 +351,35 @@ const _browser = {
                 webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
             };
         }(),
-        language:(navigator.browserLanguage || navigator.language).toLowerCase()
+        language:(navigator.browserLanguage || navigator.language).toLowerCase(),
+        ieVersion:function(){
+            var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+            var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+            var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+            var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+            if(isIE) {
+                var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                reIE.test(userAgent);
+                var fIEVersion = parseFloat(RegExp["$1"]);
+                if(fIEVersion == 7) {
+                    return 7;
+                } else if(fIEVersion == 8) {
+                    return 8;
+                } else if(fIEVersion == 9) {
+                    return 9;
+                } else if(fIEVersion == 10) {
+                    return 10;
+                } else {
+                    return 6;//IE版本<=7
+                }
+            } else if(isEdge) {
+                return 'edge';//edge
+            } else if(isIE11) {
+                return 11; //IE11
+            }else{
+                return -1;//不是ie浏览器
+            }
+        }
     },
     format        :(fmt, time) => {
         let date = new Date(time);

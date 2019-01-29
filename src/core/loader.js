@@ -24,7 +24,7 @@ class loader {
             
         }else if(this.error.length > 0){
             let e = window[config.prefix].throwError
-            this.error.forEach(function(err){
+            $.each(this.error,function(index,err){
                 e(err.msg + '模块路径：'+ err.path)
             })
         }
@@ -33,7 +33,7 @@ class loader {
     set(path){
         let _this = this;
         if($.isArray(path)){
-            path.forEach(function(ele){
+            $.each(path,function(index,ele){
                 _this.queue[ele] = 1
             })
         }else{
@@ -41,7 +41,7 @@ class loader {
         }
     }
 
-    delete(path){
+    deleter(path){
         delete this.queue[path]
     }
 

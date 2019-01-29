@@ -2,7 +2,6 @@ import $ from '../tools/tools'
 import U from '../tools/utils'
 import config from '../config/config'
 import loader from './loader'
-import { cmpstaus } from '../config/global';
 class use {
     constructor(){
         let _this = this
@@ -27,7 +26,6 @@ class use {
         //判断当前paths是否已经全部加载，没有加载的选项返回，并挂起（包装扩展）回调方法待执行（加载完毕后再执行，再检测）。
         _this.loadExecute = new loader(_this._readyToLoad,_this)
         //第一次强制执行，同时挂起所有未准备就绪的模块
-        // _this.loadExecute.execute()
         _this._readyToLoad()
     }
 
@@ -87,12 +85,12 @@ class use {
                     let _unregister = []
                         _this._loader  = new loader(_loaderRequest)
                     //筛选未注册的模块，同时加入新的loader队列
-                    paths.forEach(function(ele){
-                       if(!ele.m){
-                           _unregister.push(ele.path)
-                           _this._loader.set(ele.path)
-                           U.requestFile(ele.path, _this._loader, R)
-                       }
+                    $.each(paths,function (index,ele) {
+                        if(!ele.m){
+                            _unregister.push(ele.path)
+                            _this._loader.set(ele.path)
+                            U.requestFile(ele.path, _this._loader, R)
+                        }
                     })
                  }
         }

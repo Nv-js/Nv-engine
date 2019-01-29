@@ -41,7 +41,7 @@ const common = {
     isRegisterAllName  : (ns, R) => {
         let status = 1,
             _M = R.global.MODULESLIST
-        ns.forEach(function(ele){
+        $.each(ns,function (index,ele) {
             if(!_M[ele.path]){
                 status = 0
                 return false
@@ -71,7 +71,7 @@ const tools = {
            _rets = [];
 
         if(_checkName && _requires.length > 0){
-            _requires.forEach(function(ele,index,arr){
+            $.each(_requires,function(index,ele){
                 // 如果依赖开头是以“./” or ".\"开头
                 let _v = common.isRelativeName(ele)
                 if(_v){
@@ -82,9 +82,9 @@ const tools = {
                 // 如果当前是以‘/’ or "\" 开头
                 _v = common.isAbsoluteName(ele)
                 if(_v){
-                     ele = ele.replace(regx.Regx_name_r, "")
-                     _rets.push("./" + ele)
-                     return
+                    ele = ele.replace(regx.Regx_name_r, "")
+                    _rets.push("./" + ele)
+                    return
                 }
                 _rets.push(ele)
             })
@@ -108,7 +108,7 @@ const tools = {
             _m;
         if(ns && $.isArray(ns)){
             ns = tools.fixPaths(ns);
-            ns.forEach(function(ele,index,arr){
+            $.each(ns,function (index,ele) {
                 if(_repeat[ele]){
                     ns[index] = _repeat[ele]
                     return
@@ -141,7 +141,7 @@ const tools = {
 
         if($.isArray(paths)){
             let _rets = [];
-            paths.forEach(function(ele, index, arr){
+            $.each(paths,function (index,ele) {
                 if(ele){
                     _rets.push(tools.fixPathItem(ele))
                 }
@@ -198,10 +198,10 @@ const use = {
             _mAlias,
             _rets = [R]
         if($.isArray(paths)){
-            paths.forEach(function(ele, index, arr){
+            $.each(paths,function (index,ele) {
                 _m        = _M[ele]
                 _mName    = _m.name
-                _mExport = _m.export
+                _mExport = _m._exports
                 _mAlias   = _m.alias || ''
                 if(_mName && $.extname(_mName) !== '.css'){
                     try{
@@ -223,7 +223,7 @@ const use = {
             _unR = [],
             _repeat = {}
         if($.isArray(path)){
-            path.forEach(function(ele, index, arr){
+            $.each(path,function (index,ele) {
                 if(_repeat[ele]){
                     return
                 }
@@ -235,7 +235,7 @@ const use = {
                         path: ele,
                         m   : _m
                     })
-                    return 
+                    return
                 }
                 if(_m.status < cmpstaus.SUCCESS){
                     _unR.push({
@@ -254,7 +254,7 @@ const use = {
         if($.isString(path)){
             path = [path]
         }
-        path.forEach(function(ele, index, arr){
+        $.each(path,function (index,ele) {
             use.requestFilePath(ele,loader, R)
         })
 
@@ -290,7 +290,7 @@ const use = {
         let _file = new getFile(_path,{
             success:function(){
                 //删除等待条目
-                loader.delete(path)
+                loader.deleter(path)
                 if($.endWidth(path,'.css')){
                     R.global.MODULESLIST[path].status = cmpstaus.SUCCESS
                     R.global.MODULESLIST[path].lock = 1
@@ -318,35 +318,21 @@ const use = {
         let _requires = [],
             _repeatR = [],
             _repeat = {}
-        paths.forEach(function(ele, index, arr){
-            let _e = R.global.MODULESLIST[ele.path],
-                _r = _e.requires || []
-            //     _rets = []
-            // if(_r.length){
-            //     let _prefix = tools.getPathPrefix(ele.path)
-            //     _r.forEach(function(_ele){
-            //        if(common.isRelativeName(_ele)){
-            //
-            //        }
-            //     })
-            // }
+            $.each(paths,function(index,ele){
+                let _e = R.global.MODULESLIST[ele.path],
+                    _r = _e.requires || []
+                if(_r && _r.length > 0 && _e.status < cmpstaus.READY_TO_BIND){
+                    _requires = _requires.concat(_r)
+                }
+            })
 
-            if(_r && _r.length > 0 && _e.status < cmpstaus.READY_TO_BIND){
-                _requires = _requires.concat(_r)
-            }
-        })
         //去重
-        _requires.forEach(function(ele){
+        $.each(_requires,function (index,ele) {
             if(_repeat[ele]){
                 return
             }
             _repeatR.push(ele)
         })
-
-
-
-
-
         return _repeatR
     },
     bindingAllRelationPaths(paths, R, handler){
@@ -355,7 +341,7 @@ const use = {
              _m,
              _rets = [],
              _go = 1
-        paths.forEach(function(ele){
+        $.each(paths,function(index,ele){
             _m = _M[ele.path]
             if(_m.status === cmpstaus.SUCCESS){
                 return
@@ -388,36 +374,34 @@ const use = {
     },
     bindingExtend(paths, R, handler){
         let _M = R.global.MODULESLIST
-        paths.forEach(function(ele){
+        $.each(paths,function (index,ele) {
             let _m           = _M[ele],
                 _factory     = _m.factory,
                 _requires    = _m.requires || [],
                 hand,
                 handR,
                 _rets = [R]
-                
-                if(_requires.length){
-                    _requires.forEach(function(rele){
-                        let _mi = _M[rele]
-                       if(!_mi){
-                           R.throwError('检查该模块'+rele+'是否拼写异常')
-                       }
-                       if($.extname(rele) === '.css'){
-                           hand = undefined
-                       }else{
-                           hand = _mi.export ? _mi.export : _mi.factory()
-                       }
-                       _rets.push(hand)
-                    })
-                }
-                handR = _factory(..._rets)
-                R.global.MODULESLIST[ele].export = handR
-                R.global.MODULESLIST[ele].status = cmpstaus.SUCCESS
-                R._pub.publish(ele)
-                //通知绑定关系
-                // use.storagePath(ele, R)      
+
+            if(_requires.length){
+                $.each(_requires,function (rindex,rele) {
+                    let _mi = _M[rele]
+                    if(!_mi){
+                        R.throwError('检查该模块'+rele+'是否拼写异常')
+                    }
+                    if($.extname(rele) === '.css'){
+                        hand = undefined
+                    }else{
+                        hand = _mi._exports ? _mi._exports : _mi.factory()
+                    }
+                    _rets.push(hand)
+                })
+            }
+            handR = _factory(..._rets)
+            R.global.MODULESLIST[ele]._exports = handR
+            R.global.MODULESLIST[ele].status = cmpstaus.SUCCESS
+            R._pub.publish(ele)
         })
-       handler() 
+       handler()
     },
     //存储成熟的绑定关系到缓存,暂时不用
     storagePath(path, R){

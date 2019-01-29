@@ -54,17 +54,33 @@ class loadFile {
         }
 
         let loadStatus = 'onload' in node,
+
             readyEvent = loadStatus ? 'onload' : 'onreadystatechange';
-        
+
+        node.onerror = function(){
+            _this.error(_this.url,node,'Load error , please check')
+        }
         node[readyEvent] = function(){
+            if(readyEvent == 'onload'){
+                _success()
+            }else{
+                if(/loaded|complete/.test(node.readyState)){
+                    _success()
+                }
+            }
+        }
+
+
+        function _success(){
             node.onreadystatechange = node.onload = null;
-            _this._timer.cancel();
+            _this._timer.cancel()
+            let ie = $.browser.ieVersion()
             _this.success()
         }
 
         if(_this.timeout){
         _this._timer = $.later(function(){
-                _this.error()
+                _this.error(_this.url,node,'load timeout , please check')
             },_this.timeout*1000)
         }
 

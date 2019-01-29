@@ -23,7 +23,7 @@ class add {
             _config = {
                 ..._this.config,
                 factory   : _this.factory,
-                export    : '',
+                _exports    : '',
                 name      : U.fixPathItem(_this.name),
                 requires  : _deps,
                 status    : cmpstaus.LOADED,

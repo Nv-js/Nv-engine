@@ -5,6 +5,8 @@ import publish   from './core/publish'
 import getFile   from './tools/getFile'
 import {global,log,throwError,cmpstaus}    from './config/global'
 
+
+
 let _T = {
       document:window.document,
       window:window,
@@ -34,11 +36,12 @@ if(!window[global.PREFIX]){
       //发布订阅初始化
       window[global.PREFIX] = _T
       window[global.PREFIX].tools.later(function(){
-            window[global.PREFIX].use('init','dp',function(){
-                  window[global.PREFIX].readyQueen.forEach(function(ele){
-                        ele()
+            window[global.PREFIX].use('init',function(){
+                  tools.each(window[global.PREFIX].readyQueen,function (index,ele) {
+                      ele()
                   })
             })
       },0)
 
 }
+
