@@ -17,13 +17,12 @@
 <script type="text/javascript" src="/dist/nv.js"></script>
 <script type="text/javascript">
   Nv.config({
-      baseUrl:"/test/",
-      cdnUrl:'http://192.168.23.2:9999/dist/cdn/'
+      baseUrl:"/test/"
   })
     Nv.ready(function(){
-//        Nv.use('./a',function(nv){
-//            console.log(nv.global.MODULESLIST)
-//        })
+        Nv.use('./a',function(nv){
+            console.log(nv.global.MODULESLIST)
+        })
     })
 
 </script>
