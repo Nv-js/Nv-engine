@@ -50,9 +50,10 @@
 引入方式如下：
 
 ```html
-<!--css样式请放在head标签内部-->
+    <!--css样式请放在head标签内部-->
     <link type="text/css" rel="stylesheet" href="//storage.360buyimg.com/v2.0.0/nv.min.css" />
     <!--以下script请放到</body>前-->
+    <!--多了个兼容IE8的脚本polyfill.min.js-->
     <script type="text/javascript" src="//storage.360buyimg.com/v2.0.0/polyfill.min.js"></script>
     <script type="text/javascript" src="//storage.360buyimg.com/v2.0.0/nv.min.js"></script>
     <!--具体初始化全局配置-->
