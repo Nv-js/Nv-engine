@@ -383,6 +383,7 @@ const use = {
                 _rets = [R]
 
             if(_requires.length){
+               _requires = tools.getCoreModuleList(_requires, R)
                 $.each(_requires,function (rindex,rele) {
                     let _mi = _M[rele]
                     if(!_mi){
