@@ -72,7 +72,6 @@ class use {
                                 _this.loadExecute.execute()
                             })
                         })
-                        console.log(_requires)
                         window[config.prefix].use(..._requires)
                         return 
                     }
