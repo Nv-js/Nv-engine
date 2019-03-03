@@ -63,7 +63,7 @@
            //配置plugin_modules的目录；
            baseUrl:"/js/plugin_modules/",
            //开发模式，默认关闭；开发模式可以开启。
-           requestTime:true
+           development:true
        })
        //初始入口，Nv各个模块准备就绪后调用；
        Nv.ready(function(){
