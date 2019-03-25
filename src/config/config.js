@@ -1,5 +1,11 @@
+import theme     from '../tools/theme'
+
 const version = 'v2.0.0',
       prefix  = 'Nv';
+
+const _default = theme()
+
+console.log(_default)
 
 export default  {
     config : {
@@ -24,6 +30,8 @@ export default  {
                 path    : './init/@version/cdn_index'
             }
         },
+        //主题色
+        theme           : _default,
         //语言设置：详情见多语言文档
         language        : 'zh_CN'
         // storage         : {

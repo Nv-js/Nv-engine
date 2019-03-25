@@ -6,7 +6,6 @@ import getFile   from './tools/getFile'
 import {global,log,throwError,cmpstaus}    from './config/global'
 
 
-
 let _T = {
       document:window.document,
       window:window,
@@ -32,11 +31,12 @@ let _T = {
       }     
 }
 
+
 if(!window[global.PREFIX]){
       //发布订阅初始化
       window[global.PREFIX] = _T
       window[global.PREFIX].tools.later(function(){
-            window[global.PREFIX].use('dp','init',function(){
+            window[global.PREFIX].use('init',function(){
                   tools.each(window[global.PREFIX].readyQueen,function (index,ele) {
                       ele()
                   })
