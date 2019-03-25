@@ -160,7 +160,13 @@ Nv的API
      **选填**，显示当前Nv的版本信息
      
    <br/>
-     
+   
+    + options.theme  (String)
+      
+     **不建议修改**，默认读取link标签中带有 **data-theme**属性的主题。如果不添加则读取主题色'极客蓝'（默认主题）
+        
+        
+    <br/>  
      
    + options.language  (String)
    

@@ -51,7 +51,7 @@
 
 ```html
     <!--css样式请放在head标签内部-->
-    <link type="text/css" rel="stylesheet" href="//storage.360buyimg.com/v2.0.0/nv.min.css" />
+    <link type="text/css" rel="stylesheet" data-theme href="//storage.360buyimg.com/v2.0.0/nv.min.css" />
     <!--以下script请放到</body>前-->
     <!--多了个兼容IE8的脚本polyfill.min.js-->
     <script type="text/javascript" src="//storage.360buyimg.com/v2.0.0/polyfill.min.js"></script>
@@ -79,6 +79,7 @@
        })
     </script>
 ```
+**切记，在引入css时候要加入`data-theme`才能识别当前主题，否则只会使用默认极客蓝主题色**
 
 
 > 全量产品线引入
