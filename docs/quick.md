@@ -5,7 +5,7 @@
 
 ```html
     <!--css样式请放在head标签内部-->
-    <link type="text/css" rel="stylesheet" href="//storage.360buyimg.com/v2.0.0/nv.min.css" />
+    <link type="text/css" rel="stylesheet"  data-theme href="//storage.360buyimg.com/v2.0.0/nv.min.css" />
     <!--以下script请放到</body>前-->
     <script type="text/javascript" src="//storage.360buyimg.com/v2.0.0/nv.min.js"></script>
     <!--具体初始化全局配置-->
@@ -33,6 +33,7 @@
 ```
 以上方式直接使用即可，但是不建议采用页面书写业务逻辑的方式，其他书写方式[请一起讨论](//github.com/guguaihaha/Nv-engine/issues/2)
 
+**切记，在引入css时候要加入`data-theme`才能识别当前主题，否则只会使用默认极客蓝主题色**
 
 > 只引用样式
 ```html
