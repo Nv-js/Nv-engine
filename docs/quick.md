@@ -1,6 +1,6 @@
 如何快速开始引入Nv
 ---
-***此页面建立了[讨论区](//github.com/guguaihaha/Nv-engine/issues/3)，欢迎提问和协同解决问题***
+***此页面建立了[讨论区](//github.com/Nv-js/Nv-engine/issues/3)，欢迎提问和协同解决问题***
 > 原始方式
 
 ```html
@@ -31,7 +31,7 @@
        })
     </script>
 ```
-以上方式直接使用即可，但是不建议采用页面书写业务逻辑的方式，其他书写方式[请一起讨论](//github.com/guguaihaha/Nv-engine/issues/2)
+以上方式直接使用即可，但是不建议采用页面书写业务逻辑的方式，其他书写方式[请一起讨论](//github.com/Nv-js/Nv-engine/issues/2)
 
 **切记，在引入css时候要加入`data-theme`才能识别当前主题，否则只会使用默认极客蓝主题色**
 
@@ -87,4 +87,4 @@
 
 这种方式就是采用Nv-pro布局，我们可以使用的具体方案如下
 
-[此处是如何使用Pro系统解决方案](//github.com/guguaihaha/Nv-pro)
+[此处是如何使用Pro系统解决方案](//github.com/Nv-js/Nv-pro)

@@ -43,7 +43,7 @@ Nv的API
   第二个参数开始是对应use的对象入参顺序。如果use对象过多可以参考使用nv.alias 来使用
   
 
-- 参考用法：[使用方法](//github.com/guguaihaha/Nv-engine/issues/4)
+- 参考用法：[使用方法](//github.com/Nv-js/Nv-engine/issues/4)
 
 <br/>
 <br/>
@@ -74,7 +74,7 @@ Nv的API
   
   + options 是配置项目，目前包含两个对象{alias:"aliasName",requires:["param1","param2",...]}
   
-- 参考用法：[使用方法](//github.com/guguaihaha/nv-engine/issues/5) 
+- 参考用法：[使用方法](//github.com/Nv-js/nv-engine/issues/5) 
  
  <br/>
  <br/>
@@ -122,7 +122,7 @@ Nv的API
  - 用法：
  此方法直接在Nv.use或者Nv.add方法的回调函数中第一个参数调用。用于快速获取具有别名的组件
  
- - 参考用法：[使用方法](//github.com/guguaihaha/nv-engine/issues/4#user-content-alias)
+ - 参考用法：[使用方法](//github.com/Nv-js/nv-engine/issues/4#user-content-alias)
  
 <br/>
 <br/>
@@ -221,7 +221,7 @@ Nv的API
     以上配置中以`"key":{"path":"","version":""}`中结构为主，其中key是use使用别名的名称，path是对应的实际路径，其中@version就是以下version的版本信息。
     因为每个组件的版本有可能不同，请根据项目需要自行引入
  
- - 参考用法：[使用方法](//github.com/guguaihaha/Nv-engine/issues/6)
+ - 参考用法：[使用方法](//github.com/Nv-js/Nv-engine/issues/6)
  
  <br/>
  <br/>
@@ -265,7 +265,7 @@ Nv的API
    
    **必填** 继承的子对象
    
- - 参考用法：[使用方法](//github.com/guguaihaha/Nv-engine/issues/7) 
+ - 参考用法：[使用方法](//github.com/Nv-js/Nv-engine/issues/7) 
   <br/>
   <br/>
   <br/>
@@ -301,7 +301,7 @@ Nv的API
      
        ***选填***，[入参] 绑定后参数一函数（func）执行时候的参数
        
-   [参考用法](//github.com/guguaihaha/Nv-engine/issues/8)
+   [参考用法](//github.com/Nv-js/Nv-engine/issues/8)
     
    <br/>
    
@@ -320,7 +320,7 @@ Nv的API
        
        其中key为对象的键，value对应对象的值
                   
-   [参考用法](//github.com/guguaihaha/Nv-engine/issues/9) 
+   [参考用法](//github.com/Nv-js/Nv-engine/issues/9) 
   
    <br/>
    
@@ -644,7 +644,7 @@ Nv的API
       
         取消当前定时器方法
        
-      [参考用法](//github.com/guguaihaha/Nv-engine/issues/10)  
+      [参考用法](//github.com/Nv-js/Nv-engine/issues/10)  
             
    <br/>   
    
@@ -787,7 +787,7 @@ Nv的API
      
      当然还有清除单独值缓存或者清除所有缓存，具体参考如下：
      
-     [参考用法](//github.com/guguaihaha/Nv-engine/issues/11)
+     [参考用法](//github.com/Nv-js/Nv-engine/issues/11)
      
      <br/>
      

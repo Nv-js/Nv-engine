@@ -1,9 +1,9 @@
 {
-  "name": "Zr",
+  "name": "Nv",
   "version": "2.0.1",
-  "description": "Zr for 2.x",
+  "description": "Nv for 2.x",
   "main": "index.js",
-  "repository": "https://github.com/guguaihaha/Zr-engine-v2.git",
+  "repository": "https://github.com/Nv-js/Nv-engine.git",
   "author": "zhangjinglin@jd.com",
   "license": "MIT",
   "dependencies": {
