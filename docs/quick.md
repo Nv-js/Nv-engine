@@ -38,7 +38,7 @@
 > 只引用样式
 ```html
     <!--css样式请放在head标签内部-->
-    <link type="text/css" rel="stylesheet" href="//storage.360buyimg.com/v2.0.0/nv.min.css" />
+    <link type="text/css" rel="stylesheet" data-theme href="//storage.360buyimg.com/v2.0.0/nv.min.css" />
 ```
 样式引用可以自由使用内置组件的基本样式红利，但是内置组件涉及到的动画、业务处理逻辑则丢失，请根据需求自行决定
 
