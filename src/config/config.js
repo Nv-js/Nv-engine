@@ -5,8 +5,6 @@ const version = 'v2.0.0',
 
 const _default = theme()
 
-console.log(_default)
-
 export default  {
     config : {
         //组件引擎的版本
