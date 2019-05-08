@@ -53,7 +53,7 @@ $ npm run build
 
 ### 快速导航
 
-+ [官网](http://nv.jd.com)
++ [官网](http://www.nv-js.com)
 
 + [引擎常用方法](docs/API.md)
 
