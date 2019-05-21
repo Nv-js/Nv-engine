@@ -55,11 +55,11 @@ $ npm run build
 
 + [官网](http://www.nv-js.com)
 
-+ [引擎常用方法](docs/API.md)
++ [引擎常用方法](https://github.com/Nv-js/Nv-engine/blob/master/docs/API.md)
 
-+ [快速导航](docs/quick.md)
++ [快速导航](https://github.com/Nv-js/Nv-engine/blob/master/docs/quick.md)
 
-+ [多语言支持](docs/language.md)
++ [多语言支持](https://github.com/Nv-js/Nv-engine/blob/master/docs/language.md)
 
 + [组件库常用方法](https://github.com/Nv-js/Nv-source)
 
