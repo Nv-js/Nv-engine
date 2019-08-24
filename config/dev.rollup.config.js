@@ -1,5 +1,6 @@
 const liveServer = require('rollup-plugin-live-server')
 const { eslint } = require('rollup-plugin-eslint')
+const pkg = require('../package.json')
 //开发环境需要使用的插件
 const devPlugins = [
     liveServer({
@@ -12,8 +13,8 @@ const devPlugins = [
 ]
 
 const target = {
-    file: 'dist/nv.js',
-    name:"Nv",
+    file: 'dist/'+ (pkg.name).toLowerCase() +'.js',
+    name:pkg.name,
     format: 'umd'
 }
 
