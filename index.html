@@ -21,8 +21,13 @@
       baseUrl:"/test/"
   })
     Nv.ready(function(){
-        Nv.use('./a',function(nv){
-//            console.log(nv.global.MODULESLIST)
+        Nv.use('jquery',function(nv){
+        })
+        Nv.use('jquery','swiper',function(nv){
+        })
+        Nv.use('jquery','jstree',function(nv){
+        })
+        Nv.use('ajaxForm',function(nv){
         })
     })
 

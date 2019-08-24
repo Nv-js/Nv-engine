@@ -1,5 +1,5 @@
-const liveServer = require('rollup-plugin-live-server') 
-
+const liveServer = require('rollup-plugin-live-server')
+const { eslint } = require('rollup-plugin-eslint')
 //开发环境需要使用的插件
 const devPlugins = [
     liveServer({
@@ -7,7 +7,8 @@ const devPlugins = [
         open: true,
         ignore:'src,node_modules,plugin_modules,docs,.gitignore,git/FETCH_HEAD',
         root: ''
-    })
+    }),
+    // eslint()
 ]
 
 const target = {

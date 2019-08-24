@@ -348,7 +348,7 @@ const use = {
             }
             //判断当前的模块状态，如果是BINDING以上的状态，则全体等待订阅这个路径完成后再继续运行
             function waitBinding(){
-                bindingAllRelationPaths(paths, R, handler)
+                use.bindingAllRelationPaths(paths, R, handler)
             }
             if(_m.status >= cmpstaus.BINDING){
                 R._pub.subscibe(ele.path,waitBinding)
