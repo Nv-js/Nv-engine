@@ -1,7 +1,6 @@
 import theme     from '../tools/theme'
-const pkg = require('../../package.json')
-const version = pkg.version,
-      prefix  = pkg.name;
+const version = "2.0.1",
+      prefix  = "Zr";
 
 const _default = theme()
 
