@@ -18,6 +18,7 @@ class use {
         _this.fixModule = U.fixPaths(_this.args)
         //路径别名补全
         _this.fixModule = U.getCoreModuleList(_this.fixModule, window[config.prefix])
+
         _this._init();
     }
 
@@ -58,6 +59,7 @@ class use {
         //paths肯定是未加载的或者待绑定的路径集合，所以要全部挂起
         let  R = window[config.prefix],
             _M = R.global.MODULESLIST
+
         //检查是否有未加载的path，全部加载则执行绑定
         function _loaderRequest(){
             let _loadRets = [],

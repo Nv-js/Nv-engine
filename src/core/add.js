@@ -18,16 +18,18 @@ class add {
     
     _init(){
         let _this = this,
+            _fixName = U.fixPathItem(_this.name),
             _R = window[global.PREFIX],
+            _m = _R.global.MODULESLIST[_fixName] || {},
             _deps = U.getFixRequiresPaths(_this,_R),
             _config = {
                 ..._this.config,
                 factory   : _this.factory,
                 _exports    : '',
-                name      : U.fixPathItem(_this.name),
+                name      : _fixName,
                 requires  : _deps,
                 status    : cmpstaus.LOADED,
-                lock      : 0
+                lock      : _m.lock || 0
             }
         //注册模块到核心库上
         U.register(_config,_R)

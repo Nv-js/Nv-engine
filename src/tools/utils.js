@@ -96,6 +96,7 @@ const tools = {
         }
         return _rets;
     },
+
     
     /**
      * 检查集合中是否有别名，有则替换路径，没有则返回
@@ -175,7 +176,6 @@ const add = {
      register:function(config, R) {
          let name = config.name,
              M = R.global.MODULESLIST
-             
          if(M[name]){
              M[name] = $.extend(true,M[name],config)
          }else{
@@ -279,6 +279,7 @@ const use = {
         }
         //更新模块状态
         R.global.MODULESLIST[path].status = cmpstaus.LOADING
+        R.global.MODULESLIST[path].lock = 1
         //
         if(!$.endWidth(_path,'.js') && !$.endWidth(_path,'.css')){
             _path += '.js'
@@ -287,6 +288,7 @@ const use = {
         if(R.global.CONFIG.development){
            _path += '?t='+$.getWords(1,10,20)
         }
+
         let _file = new getFile(_path,{
             success:function(){
                 //删除等待条目
@@ -350,16 +352,16 @@ const use = {
             function waitBinding(){
                 use.bindingAllRelationPaths(paths, R, handler)
             }
-            if(_m.status >= cmpstaus.BINDING){
+            if(_m.status != cmpstaus.SUCCESS && _m.lock && !_m.factory){
                 R._pub.subscibe(ele.path,waitBinding)
                 _go = 0
                 return false
             }
-
             R.global.MODULESLIST[ele.path].status = cmpstaus.BINDING
             R.global.MODULESLIST[ele.path].lock = 1
             _rets.push(ele.path);
         })
+
         //当前订阅了绑定行为，终止所有流程，等待通知再执行
         if(!_go){
             return false
@@ -387,7 +389,7 @@ const use = {
                 $.each(_requires,function (rindex,rele) {
                     let _mi = _M[rele]
                     if(!_mi){
-                        R.throwError('检查该模块'+rele+'是否拼写异常')
+                        R.throwError('check the module '+rele+' spell right?')
                     }
                     if($.extname(rele) === '.css'){
                         hand = undefined
@@ -397,6 +399,10 @@ const use = {
                     _rets.push(hand)
                 })
             }
+
+            ////
+
+
             handR = _factory(..._rets)
             R.global.MODULESLIST[ele]._exports = handR
             R.global.MODULESLIST[ele].status = cmpstaus.SUCCESS

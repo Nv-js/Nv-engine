@@ -5,7 +5,6 @@ const _global = {
      CONFIG      : _config.config,
      PREFIX      : _config.prefix
 }
-
 const _log = () => {
    //log todo something
 }
