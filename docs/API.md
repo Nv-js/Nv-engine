@@ -960,15 +960,15 @@ Nv的API
      
      * 返回类型：
      
-      `{Number} @return`
+      `{Object} @return`
       
      * 示例:
      
-     `Nv.tools.splitMoney('987263.45')`
+     `Nv.tools.transUrl('http://www.xx.com?id=1&j=opeu&time=1092')`
      
      结果是
      
-     `98.73万`
+     `{id:1,j:opeu,time:1092}`
   
    <br/>         
       
