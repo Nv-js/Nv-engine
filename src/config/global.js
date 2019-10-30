@@ -5,11 +5,13 @@ const _global = {
      CONFIG      : _config.config,
      PREFIX      : _config.prefix
 }
-const _log = () => {
-   //log todo something
-}
+
 const _throwError = (msg) => {
-   throw msg;
+   try{
+       throw msg;
+   }catch(e){
+
+   }
 }
 
 const _status = {
@@ -30,8 +32,6 @@ const _status = {
 }
 
 export const global     = _global
-
-export const log        = _log
 
 export const throwError = _throwError
 

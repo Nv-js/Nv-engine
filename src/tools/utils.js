@@ -7,7 +7,9 @@ const  regx = {
     Regx_name           :  /^\.[\/|\\]\w+[\/|\\]/,
     Regx_name_l         :  /^(\.[\/|\\])/g,
     Regx_name_r         :  /^[\/|\\]/g,
-    Regx_prefix         :  /\.[\/|\\]+/
+    Regx_prefix         :  /\.[\/|\\]+/,
+    Regx_start          : /^\w.+/,
+    Regx_last           : /[\/|\\]$/
 }
 
 
@@ -16,6 +18,12 @@ const  regx = {
  * 检测类
  */
 const common = {
+    /**
+     *
+     */
+    checkIsPath        : (n) => {
+        return n.match(regx.Regx_start) ? 1 : 0
+    },
     /**
      * 检测是否符合约定路径写法
      * @param  {路径名称} n
@@ -59,6 +67,25 @@ const tools = {
          }
          return path
      },
+    getRplacePath         : (path, R) => {
+         let paths = R.global.CONFIG.paths
+         let index = path.indexOf("/"),
+             pre = path.substring(0,index),
+             last = path.substring(index),
+             realPre = tools.getFixRealPaths(paths[pre])
+        if(realPre){
+             return realPre + last
+        }else {
+            return path
+        }
+    },
+    getFixRealPaths       : (path) => {
+         if(regx.Regx_last.test(path) && path){
+             path = path.substring(0,path.lastIndexOf('/'))
+         }
+
+         return path
+    },
     /**
      * @param  {当前可执行的环境} T
      * @param  {全局函数集合} R
@@ -263,7 +290,8 @@ const use = {
     //加载对应路径文件
     requestFilePath(path,loader, R){
         let baseUrl = R.global.CONFIG.baseUrl,
-            cdnUrl = R.global.CONFIG.cdnUrl
+            cdnUrl = R.global.CONFIG.cdnUrl,
+            paths = R.global.CONFIG.paths
         //注册状态
         add.register({
             name:path,
@@ -272,10 +300,20 @@ const use = {
         }, R)
         //加载文件
         let _repath = path.replace(regx.Regx_prefix,'')
-        let _typeStatus = _repath.lastIndexOf("cdn_"),
-            _path = baseUrl + _repath
-        if(_typeStatus > -1){
+        let _typeStatus = _repath.lastIndexOf("cdn_")
+            // _path = baseUrl + _repath
+        let isPath = common.checkIsPath(path),
+            _path = ""
+
+        if(_typeStatus > -1 && !isPath){
             _path = cdnUrl + _repath
+        }
+
+        if(isPath){
+            _path = tools.getRplacePath(path,R)
+        }
+        if(!_path){
+            _path = baseUrl + _repath
         }
         //更新模块状态
         R.global.MODULESLIST[path].status = cmpstaus.LOADING
@@ -288,7 +326,6 @@ const use = {
         if(R.global.CONFIG.development){
            _path += '?t='+$.getWords(1,10,20)
         }
-
         let _file = new getFile(_path,{
             success:function(){
                 //删除等待条目

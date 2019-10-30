@@ -37,7 +37,7 @@ publish.prototype = {
             _args = Array.prototype.slice.call(path, 1)
 
         if(!(_self.contains(path))){
-            window[config.prefix].log(path + '的方法并没有发布订阅，请核实问题后重试')
+            // window[config.prefix].log(path + '的方法并没有发布订阅，请核实问题后重试')
         }else{
             $.each(_self.eventList[path],function(index,ele){
                 ele.apply(_self,_args);

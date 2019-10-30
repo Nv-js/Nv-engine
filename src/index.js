@@ -3,7 +3,7 @@ import file      from './tools/getFile'
 import module    from './core/module'
 import publish   from './core/publish'
 import getFile   from './tools/getFile'
-import {global,log,throwError,cmpstaus}    from './config/global'
+import {global,throwError,cmpstaus}    from './config/global'
 
 
 let _T = {
@@ -21,7 +21,7 @@ let _T = {
       require:getFile,
       extend:tools.extend,
       global,
-      log,
+      log:tools.log,
       throwError,
       cmpstaus,
       _pub:new publish(),

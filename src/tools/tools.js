@@ -263,7 +263,31 @@ const _ser = {
             str += arr[pos];
         }
         return str;
-    }
+    },
+    log         : (msg) => {
+        if('console' in window){
+            console.log(msg)
+        }else{
+            throw msg;
+        }
+    },
+    tmpl        : (html, data) =>{
+        var StringText = html,
+            textString = "var jspe = '"
+        textString += StringText.replace(/\s/g,function (s) {
+            return {
+                '\n': '\\n',
+                '\r': '\\r',
+                '\t': '\\t',
+                ' ': ' '
+            }[s] || '\\' + s
+        }).replace(/\{\%\=([\o\.\w|\.|\[|\]]+)\%\}/g,"'+ $1 +'")
+            .replace(/\{\%\s/g,"'; ")
+            .replace(/\s\%\}/g," jspe+='")
+        textString +="';return jspe"
+        //执行
+        return new Function('o',textString)(data)
+     }
 }
 
 const _browser = {
