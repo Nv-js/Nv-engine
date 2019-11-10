@@ -14,11 +14,11 @@ class use {
         }else{
             _this.handler = () => {}
         }
+        //
         //路径集合修复
         _this.fixModule = U.fixPaths(_this.args)
         //路径别名补全
         _this.fixModule = U.getCoreModuleList(_this.fixModule, window[config.prefix])
-
         _this._init();
     }
 
@@ -74,6 +74,8 @@ class use {
                                 _this.loadExecute.execute()
                             })
                         })
+                        //
+
                         window[config.prefix].use(..._requires)
                         return 
                     }

@@ -4,7 +4,7 @@ import getFile from './getFile'
 import myLoader from '../core/loader'
 
 const  regx = {
-    Regx_name           :  /^\.[\/|\\]\w+[\/|\\]/,
+    Regx_name           :  /(^\.[\/|\\].+[\/|\\])|(^\w.+[\/|\\])/,
     Regx_name_l         :  /^(\.[\/|\\])/g,
     Regx_name_r         :  /^[\/|\\]/g,
     Regx_prefix         :  /\.[\/|\\]+/,
@@ -29,7 +29,7 @@ const common = {
      * @param  {路径名称} n
      */
     checkValidName     : (n) => {
-        return n.match(regx.Regx_name) || ""
+        return n.match(regx.Regx_name)  || ""
     },
     
     /**
@@ -90,13 +90,14 @@ const tools = {
      * @param  {当前可执行的环境} T
      * @param  {全局函数集合} R
      */
-    getFixRequiresPaths  :  (T, R) => {
-       let _this = T, 
+    getFixRequiresPaths  :  (T, R,Test) => {
+       let _this = T,
            _checkName = common.checkValidName(_this.name),
            _prefix = tools.getPathPrefix(_this.name),
            _requires = _this.config.requires || [],
            _rets = [];
-
+       console.log(_this.name,Test,_checkName)
+       // console.log(_requires)
         if(_checkName && _requires.length > 0){
             $.each(_requires,function(index,ele){
                 // 如果依赖开头是以“./” or ".\"开头
@@ -124,7 +125,6 @@ const tools = {
         return _rets;
     },
 
-    
     /**
      * 检查集合中是否有别名，有则替换路径，没有则返回
      * @param  {待检测的模块名称或者路径} n
@@ -359,7 +359,8 @@ const use = {
             _repeat = {}
             $.each(paths,function(index,ele){
                 let _e = R.global.MODULESLIST[ele.path],
-                    _r = _e.requires || []
+                    _r = _e.requires || [];
+                //
                 if(_r && _r.length > 0 && _e.status < cmpstaus.READY_TO_BIND){
                     _requires = _requires.concat(_r)
                 }

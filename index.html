@@ -12,7 +12,18 @@
     <p>clone项目到本地，然后进入Nv-engine的目录。同时安装依赖: $ yarn install</p>
     <p>如果是开发模式：$ npm run dev</p>
     <p>如果是生产模式：$ npm run build</p>
-<!--[if IE 8]>
+    <div style="width:360px">
+        <div class="nv-input-group nv-input nv-input-datepicker" id="date-7">
+            <input type="text" class="nv-datepicker-range-start" placeholder="Start Date" readonly>
+            —
+            <input type="text" class="nv-datepicker-range-end" placeholder="End Date" readonly>
+            <span class="nv-input-addon">
+                      <i class="nvicon-calendar-empty"></i>
+                    </span>
+        </div>
+    </div>
+
+    <!--[if IE 8]>
 <script type="text/javascript" src="//storage.360buyimg.com/v2.0.0/polyfill.min.js"></script>
 <![endif]-->
 <script type="text/javascript" src="/dist/nv.js"></script>
@@ -23,20 +34,7 @@
             TT:'/test/'
         }
     })
-
-    Nv.use('jquery',function(){
-        console.log('jquery')
-    })
-
-    Nv.use('./test',function(nv,t){
-    })
-    Nv.use('TT/t',function(nv,t){
-        console.log(11)
-    })
-    Nv.use('TT/t',function(nv,t){
-        console.log(22)
-    })
-
+    Nv.use("TT/test",'./1.0.1/base/base')
 </script>
 </body>
 </html>

@@ -21,7 +21,7 @@ class add {
             _fixName = U.fixPathItem(_this.name),
             _R = window[global.PREFIX],
             _m = _R.global.MODULESLIST[_fixName] || {},
-            _deps = U.getFixRequiresPaths(_this,_R),
+            _deps = U.getFixRequiresPaths(_this,_R,'add'),
             _config = {
                 ..._this.config,
                 factory   : _this.factory,
