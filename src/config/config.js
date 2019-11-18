@@ -44,6 +44,10 @@ export default  {
             "datePicker": {
                 "path": "./fw.base/1.0.3/components/datePicker/@version/cdn_index",
                 "version": "1.0.1"
+            },
+            "dp":{
+                "path":"./fw.base/1.0.3/components/dp/@version/cdn_index",
+                "version":"1.0.1"
             }
         },
         //主题色

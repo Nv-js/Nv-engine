@@ -96,8 +96,6 @@ const tools = {
            _prefix = tools.getPathPrefix(_this.name),
            _requires = _this.config.requires || [],
            _rets = [];
-       console.log(_this.name,Test,_checkName)
-       // console.log(_requires)
         if(_checkName && _requires.length > 0){
             $.each(_requires,function(index,ele){
                 // 如果依赖开头是以“./” or ".\"开头
