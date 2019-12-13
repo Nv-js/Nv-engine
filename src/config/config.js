@@ -22,33 +22,37 @@ export default  {
         //默认映射配置文件
         modules        : {
             "jquery": {
-                "path": "./fw.base/1.0.3/components/jqplugins/jquery/@version/cdn_index",
+                "path": "./sc.base/1.0.1/components/jqplugins/jquery/@version/cdn_index",
                 "version": '1.12.3'
             },
             "jquery3": {
-                "path": "./fw.base/1.0.3/components/jqplugins/jquery/@version/cdn_index",
+                "path": "./sc.base/1.0.1/components/jqplugins/jquery/@version/cdn_index",
                 "version": '3.2.1'
             },
             "ajaxForm": {
-                "path": "./fw.base/1.0.3/components/jqplugins/jquery/jqueryform/@version/cdn_index",
+                "path": "./sc.base/1.0.1/components/jqplugins/jquery/jqueryform/@version/cdn_index",
                 "version": "35"
             },
             "tmpl": {
-                "path": "./fw.base/1.0.3/components/tmpl/@version/cdn_index",
+                "path": "./sc.base/1.0.1/components/tmpl/@version/cdn_index",
                 "version": "1.0.1"
             },
             "perfectscrollbar": {
-                "path": "./fw.base/1.0.3/components/jqplugins/jquery/perfectscrollbar/@version/cdn_index",
+                "path": "./sc.base/1.0.1/components/jqplugins/jquery/perfectscrollbar/@version/cdn_index",
                 "version": "1.0.1"
             },
             "datePicker": {
-                "path": "./fw.base/1.0.3/components/datePicker/@version/cdn_index",
+                "path": "./sc.base/1.0.1/components/datePicker/@version/cdn_index",
                 "version": "1.0.1"
             },
             "dp":{
-                "path":"./fw.base/1.0.3/components/dp/@version/cdn_index",
+                "path":"./sc.base/1.0.1/components/dp/@version/cdn_index",
                 "version":"1.0.1"
-            }
+            },
+            "init" : {
+                "path": '/sc.base/1.0.1/components/dp/@version/cdn_index',
+                "version": '1.0.1',
+            },
         },
         //主题色
         theme           : _default,
