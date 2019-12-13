@@ -1,5 +1,6 @@
 import $ from './tools'
 
+
 class loadFile {
     constructor(url,success,charset) {
         //存入初始化数据

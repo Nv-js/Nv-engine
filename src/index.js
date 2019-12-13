@@ -18,7 +18,13 @@ let _T = {
       use:module.use,
       config:module.config,
       baseConfig:global.CONFIG,
-      require:getFile,
+      require:function (url,success,charset) {
+          success = success || function () {
+              
+          }
+          const _f = new file(url,success,charset);
+          _f.request();
+      },
       extend:tools.extend,
       global,
       log:tools.log,
@@ -33,7 +39,10 @@ let _T = {
 
 
 if(!window[global.PREFIX]){
-      //发布订阅初始化
-      window[global.PREFIX] = _T
+    //发布订阅初始化
+    window[global.PREFIX] = _T
+    window[global.PREFIX].tools.later(function(){
+        window[global.PREFIX].use('dp')
+    },0)
 }
 
