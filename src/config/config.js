@@ -50,7 +50,7 @@ export default  {
                 "version":"1.0.1"
             },
             "init" : {
-                "path": '/sc.base/1.0.1/components/dp/@version/cdn_index',
+                "path": './sc.base/1.0.1/components/init/@version/cdn_index',
                 "version": '1.0.1',
             },
         },
