@@ -215,7 +215,7 @@ const _ser = {
         number = number.split("");
         number = number.reverse();
         let ret = [];
-        $.each(number,function(i,n){
+        _each(number,function(i,n){
             if(i != 0 && i % split == 0){
                 ret.push(qt);
                 ret.push(n);
