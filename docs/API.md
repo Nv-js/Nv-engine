@@ -190,13 +190,13 @@ Nv的API
      
    <br/>
              
-   + options.module  (Object)
+   + options.modules  (Object)
    
      **选填**，配置Nv.use使用的别名,具体结构如下
      
      ```javascript
       Nv.config({
-        "module":{
+        "modules":{
             //模块别名名称
             "jquery":{
               //配置的寻址路径
