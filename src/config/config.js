@@ -21,38 +21,126 @@ export default  {
         productVersion : '',
         //默认映射配置文件
         modules        : {
-            "jquery": {
-                "path": "./sc.base/1.0.1/components/jqplugins/jquery/@version/cdn_index",
-                "version": '1.12.3'
-            },
-            "jquery3": {
-                "path": "./sc.base/1.0.1/components/jqplugins/jquery/@version/cdn_index",
-                "version": '3.2.1'
-            },
-            "ajaxForm": {
-                "path": "./sc.base/1.0.1/components/jqplugins/jquery/jqueryform/@version/cdn_index",
-                "version": "35"
-            },
-            "tmpl": {
-                "path": "./sc.base/1.0.1/components/tmpl/@version/cdn_index",
-                "version": "1.0.1"
-            },
-            "perfectscrollbar": {
-                "path": "./sc.base/1.0.1/components/jqplugins/jquery/perfectscrollbar/@version/cdn_index",
-                "version": "1.0.1"
-            },
-            "datePicker": {
-                "path": "./sc.base/1.0.1/components/datePicker/@version/cdn_index",
-                "version": "1.0.1"
-            },
-            "dp":{
-                "path":"./sc.base/1.0.1/components/dp/@version/cdn_index",
-                "version":"1.0.1"
+            "dp" : {
+                "version" : '1.0.1',
+                "path"    : './dp/@version/cdn_index'
             },
             "init" : {
-                "path": './sc.base/1.0.1/components/init/@version/cdn_index',
-                "version": '1.0.1',
+                "version" : '1.0.1',
+                "path"    : './init/@version/cdn_index'
             },
+            "jquery":{
+                "path":"./jqplugins/jquery/@version/cdn_index",
+                "version":'1.12.3'
+            },
+            "jquery3":{
+                "path":"./jqplugins/jquery/@version/cdn_index",
+                "version":'3.2.1'
+            },
+            "zepto":{
+                "path":"./jqplugins/zepto/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "perfectscrollbar":{
+                "path":"./perfectscrollbar/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "swiper":{
+                "path":"./swiper/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "echarts":{
+                "path":"./echarts/@version/cdn_index",
+                "version":"4.0.1"
+            },
+            "echartsSimple":{
+                "path":"./echarts/@version/cdn_echarts-simple",
+                "version":"4.0.1"
+            },
+            "echartsNormal":{
+                "path":"./echarts/@version/cdn_echarts-normal",
+                "version":"4.0.1"
+            },
+            "animate":{
+                "path":"./animate/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "compress":{
+                "path":"./compress/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "dragFloat":{
+                "path":"./dragFloat/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "message":{
+                "path":"./message/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "tab":{
+                "path":"./tabs/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "tmpl":{
+                "path":"./tmpl/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "datatables":{
+                "path":"./datatables/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "page":{
+                "path":"./page/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "modal":{
+                "path":"./modal/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "jstree":{
+                "path":"./jqplugins/jstree/@version/cdn_index",
+                "version":"3.3.5"
+            },
+            "ztree":{
+                "path":"./jqplugins/ztree/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "mock":{
+                "path":"./mock/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "datePicker":{
+                "path":"./datePicker/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "notification":{
+                "path":"./notification/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "affix":{
+                "path":"./affix/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "popover":{
+                "path":"./popover/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "tag":{
+                "path":"./tag/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "ajaxForm":{
+                "path":"./jqplugins/jqueryForm/@version/cdn_index",
+                "version":"35"
+            },
+            "progress":{
+                "path":"./progress/@version/cdn_index",
+                "version":"1.0.1"
+            },
+            "fixedColumns":{
+                "path":"./datatables/@version/cdn_fixedColumns",
+                "version":"1.0.1"
+            }
         },
         //主题色
         theme           : _default,
