@@ -1,6 +1,6 @@
 import theme     from '../tools/theme'
 
-const version = 'v2.0.1',
+const version = 'v2.3.1',
       prefix  = 'Nv';
 
 const _default = theme()
