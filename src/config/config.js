@@ -12,7 +12,7 @@ export default  {
         // //基本业务代码的根路径
         baseUrl        : '',
         //公共资源的代码根路径
-        cdnUrl         : '//static.360buyimg.com/',
+        cdnUrl         : '//storage.360buyimg.com/vzr/',
         //映射路径模块的配置，禁止使用"./或者/"，只能以别名开头会自动这里去映射
         paths:{},
         //是否开启开发模式，如果开启将会输出报错等调试代码
