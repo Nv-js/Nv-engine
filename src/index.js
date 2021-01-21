@@ -20,7 +20,7 @@ let _T = {
       baseConfig:global.CONFIG,
       require:function (url,success,charset) {
           success = success || function () {
-              
+
           }
           const _f = new file(url,success,charset);
           _f.request();
@@ -34,18 +34,16 @@ let _T = {
       readyQueen:[],
       ready:function(fn){
             _T.readyQueen.push(fn)
-      }     
+      }
 }
 
 if(!window[global.PREFIX]){
     //发布订阅初始化
     window[global.PREFIX] = _T
-    window[global.PREFIX].tools.later(function(){
-        window[global.PREFIX].use('init',function(){
-            tools.each(window[global.PREFIX].readyQueen,function (index,ele) {
-                ele()
-            })
-        })
-    },0)
+    tools.each(window[global.PREFIX].readyQueen,function (index,ele) {
+        console.log(1111 + "===" + ele)
+        ele()
+    })
+
 }
 
